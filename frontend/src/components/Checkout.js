@@ -5,6 +5,8 @@ import axios from "axios";
 const stripePromise = loadStripe("your_stripe_public_key");
 
 const Checkout = ({ cartItems }) => {
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+
   const handleCheckout = async () => {
     const stripe = await stripePromise;
     const response = await axios.post("/api/checkout", { items: cartItems });
@@ -18,7 +20,19 @@ const Checkout = ({ cartItems }) => {
   return (
     <div>
       <h1>Checkout</h1>
-      <button onClick={handleCheckout}>Pay Now</button>
+      <ul style={{ textAlign: "left", padding: 0, listStyle: "none" }}>
+        {cartItems.map((item) => (
+          <li key={item._id}>
+            {item.name} - ${item.price}
+          </li>
+        ))}
+      </ul>
+      <div style={{ fontWeight: "bold", margin: "1rem 0" }}>
+        Total: ${total.toFixed(2)}
+      </div>
+      <button onClick={handleCheckout} disabled={cartItems.length === 0}>
+        Pay Now
+      </button>
     </div>
   );
 };
