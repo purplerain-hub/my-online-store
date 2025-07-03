@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ProductList from "./components/ProductList";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import "./App.css";
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+  const [showCheckout, setShowCheckout] = useState(false);
+
+  const addToCart = (product) => {
+    setCartItems((prev) => [...prev, product]);
+  };
+
+  const removeFromCart = (id) => {
+    setCartItems((prev) => prev.filter((item) => item._id !== id));
+  };
+
+  const checkout = () => {
+    setShowCheckout(true);
+  };
+
+  const backToShop = () => {
+    setShowCheckout(false);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>My Online Store</h1>
+      {!showCheckout ? (
+        <>
+          <ProductList addToCart={addToCart} />
+          <Cart
+            cartItems={cartItems}
+            removeFromCart={removeFromCart}
+            checkout={checkout}
+          />
+        </>
+      ) : (
+        <>
+          <Checkout cartItems={cartItems} />
+          <button onClick={backToShop}>Back to Shop</button>
+        </>
+      )}
     </div>
   );
 }

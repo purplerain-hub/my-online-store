@@ -2,6 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
+
+// ... existing middleware and routes ...
+
+// Serve index.html at the root
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// ... existing code to start the server ...
 
 dotenv.config();
 
