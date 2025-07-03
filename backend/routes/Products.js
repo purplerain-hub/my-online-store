@@ -8,4 +8,12 @@ router.get("/", async (req, res) => {
   res.json(products);
 });
 
+// API endpoint for creating a new product
+router.post("/", async (req, res) => {
+  const { name, price, description } = req.body;
+  const product = new Product({ name, price, description });
+  await product.save();
+  res.json(product);
+});
+
 module.exports = router;
