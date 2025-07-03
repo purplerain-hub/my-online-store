@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const Order = require("../models/Order");
+const Order = require("../models/Orders");
 
 // Checkout route
 router.post("/", async (req, res) => {
