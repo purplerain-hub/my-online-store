@@ -57,7 +57,7 @@ npm install
 ```env
 MONGODB_URI=your_mongodb_connection_string
 STRIPE_SECRET_KEY=your_stripe_secret_key
-CLIENT_URL=http://localhost:3003
+CLIENT_URL=http://localhost:3000
 PORT=5002
 ```
 - Get your MongoDB URI from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or use your local MongoDB.
@@ -83,7 +83,7 @@ cd frontend
 npm start
 ```
 
-- Visit [http://localhost:3003](http://localhost:3003) in your browser.
+- Visit [http://localhost:3003](http://localhost:3000) in your browser.
 
 ---
 
